@@ -17,9 +17,9 @@ function App() {
     'https://github.com/nidorx/matcaps/raw/master/thumbnail/0C430C_257D25_439A43_3C683C.jpg'
   ]
  
-   const { setTextureModal, textureModal} = useContext(UserContext);
+   const { setTextureModal, textureModal, mainTexture, setMainTexture} = useContext(UserContext);
 
-   const [mainTexture, setMainTexture] = useState('https://github.com/nidorx/matcaps/raw/master/thumbnail/0C430C_257D25_439A43_3C683C.jpg');
+   
 
 
    const showModal = () => {
@@ -27,6 +27,9 @@ function App() {
    }
 
    const chooseTexture = (img) => {
+     
+      
+  
        setMainTexture(img);
      }
   return (
