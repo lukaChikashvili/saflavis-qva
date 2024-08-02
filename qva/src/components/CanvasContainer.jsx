@@ -7,7 +7,7 @@ import Lights from './Lights'
 const CanvasContainer = () => {
   return (
       <>
-        <Canvas>
+        <Canvas camera={ { fov: 75, near: 0.2, far: 1000, position: [0, 1.5, 5] } }>
             <OrbitControls makeDefault />
             <Lights />
            <HeadStone />

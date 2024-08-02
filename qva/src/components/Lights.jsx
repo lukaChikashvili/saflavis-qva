@@ -19,7 +19,7 @@ const Lights = () => {
 
 <pointLight position={[10, 10, 10]} />
 
-<ambientLight intensity={0.5} />
+<ambientLight intensity={3} />
  </>
   )
 }
