@@ -1,12 +1,18 @@
 
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
+import CanvasContainer from './components/CanvasContainer'
 
 function App() {
  
 
   return (
     <>
-   gfdyhfr
+    <Routes>
+       <Route path='/' element = { <CanvasContainer />}/>
+
+    </Routes>
+    
     </>
   )
 }
