@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Market from './components/Market'
 import { useContext, useState } from 'react'
 import { UserContext } from './context/UserContext'
+import { Plus } from 'lucide-react'
 
 function App() {
 
@@ -17,7 +18,12 @@ function App() {
     'https://github.com/nidorx/matcaps/raw/master/thumbnail/0C430C_257D25_439A43_3C683C.jpg'
   ]
  
-   const { setTextureModal, textureModal, mainTexture, setMainTexture} = useContext(UserContext);
+   const { setTextureModal, 
+           textureModal, 
+           mainTexture, 
+           setMainTexture,
+           setMoreTexture
+          } = useContext(UserContext);
 
    
 
@@ -28,9 +34,13 @@ function App() {
 
    const chooseTexture = (img) => {
      
-      
-  
-       setMainTexture(img);
+          setMainTexture(img);
+     }
+
+// function to show more textures
+     const showMoreTextures = () => {
+       setMoreTexture(true);
+       setTextureModal(false);
      }
   return (
     <>
@@ -50,7 +60,7 @@ function App() {
            <img key = {i} src={value} className='w-12 rounded-full cursor-pointer border-2 border-transparent duration-500 ease-in hover:border-2 hover:border-white' onClick={() => chooseTexture(value)}/>
         ))}
       </div>}
-    
+    {textureModal && <Plus className='text-white absolute bottom-80 right-16 cursor-pointer duration-500 ease hover:opacity-45' onClick={showMoreTextures} size={25} /> }
     </>
   )
 }

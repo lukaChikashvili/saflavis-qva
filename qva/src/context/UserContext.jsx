@@ -11,8 +11,11 @@ const UserProvider = ({ children }) => {
     // texture change
     const [mainTexture, setMainTexture] = useState('https://github.com/nidorx/matcaps/raw/master/thumbnail/0C430C_257D25_439A43_3C683C.jpg');
 
+     // more textures
+     const [moreTexture, setMoreTexture] = useState(false);
+     
     return (
-        <UserContext.Provider value = {{textureModal, setTextureModal, mainTexture, setMainTexture}}>
+        <UserContext.Provider value = {{textureModal, setTextureModal, mainTexture, setMainTexture, moreTexture, setMoreTexture}}>
             {children}
         </UserContext.Provider>
     )
