@@ -52,7 +52,20 @@ const HeadStone = () => {
       duration: 2,
       ease: 'power2.inOut',
     });
-   }
+   }else {
+    gsap.to(camera.position, {
+      x: 0, 
+      duration: 2,
+      ease: 'power2.inOut',
+    });
+
+    gsap.to(modelRef.current.position, {
+      x: 0,
+      z: 0,
+      duration: 2,
+      ease: 'power2.inOut',
+    });
+  }
   }, [moreTexture, camera]);
   return (
     <>
