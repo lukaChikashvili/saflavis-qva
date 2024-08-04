@@ -3,6 +3,7 @@ import { useGLTF, useMatcapTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { UserContext } from '../context/UserContext'
 import { useFrame, useThree } from '@react-three/fiber';
+import gsap from 'gsap';
 
 const HeadStone = () => {
   const { mainTexture, moreTexture } = useContext(UserContext);
@@ -19,13 +20,6 @@ const HeadStone = () => {
   // control camera movement
   const { camera } = useThree();
 
-  useFrame(() => {
-    if(moreTexture) {
-      camera.position.x = 8;
-      modelRef.current.position.x = 3;
-      modelRef.current.position.z = -2;
-    }
-  })
 
   
   useEffect(() => {
@@ -37,6 +31,25 @@ const HeadStone = () => {
       });
     }
   }, [scene, texture]);
+
+
+
+  useEffect(() => {
+   if(moreTexture) {
+    gsap.to(camera.position, {
+      x: 8,
+      duration: 2,
+      ease: 'power2.inOut'
+    });
+
+    gsap.to(modelRef.current.position, {
+      x: 3,
+      z: -2,
+      duration: 2,
+      ease: 'power2.inOut',
+    });
+   }
+  }, [moreTexture, camera]);
   return (
     <>
       <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />
