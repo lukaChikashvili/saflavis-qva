@@ -27,6 +27,10 @@ const HeadStone = () => {
       scene.traverse((child) => {
         if (child.isMesh) {
           child.material = new THREE.MeshBasicMaterial({ map: texture });
+          gsap.to(child.material, {
+            duration: 2,
+            ease: 'power1.inOut'
+          })
         }
       });
     }

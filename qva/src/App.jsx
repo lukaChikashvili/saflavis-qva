@@ -4,11 +4,12 @@ import { Route, Routes } from 'react-router-dom'
 import CanvasContainer from './components/CanvasContainer'
 import Header from './components/Header'
 import Market from './components/Market'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './context/UserContext'
-import { Plus } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { matcapTextures } from './components/Matcaps.js'
+import gsap from 'gsap'
 
 
 function App() {
@@ -30,7 +31,8 @@ function App() {
           } = useContext(UserContext);
 
    
-
+    const [currentPage, setCurrentPage] = useState(0);
+    const itemsPerPage = 8;
 
    const showModal = () => {
     setTextureModal(!textureModal);
@@ -41,12 +43,71 @@ function App() {
           setMainTexture(img);
      }
 
+   
+
 // function to show more textures
      const showMoreTextures = () => {
        setMoreTexture(true);
        setTextureModal(false);
      
      }
+
+     // show close icon
+     const [showX, setShowX] = useState('close');
+
+
+     // go to next page
+     const nextPage = () => {
+      if ((currentPage + 1) * itemsPerPage < matcapTextures.length) {
+        gsap.to('.texts', {
+          opacity: 0,
+          duration: 0.5,
+          delay: 0.9, 
+           ease: 'power1.inOut',
+          onComplete: () => {
+            setCurrentPage(currentPage + 1);
+            gsap.to('.texts', {
+              opacity: 1,
+              duration: 0.5,
+              ease: 'power1.inOut',
+              delay: 0.9
+            });
+          }
+        });
+      }
+    };
+
+
+     const paginatedTextures = matcapTextures.slice(
+      currentPage * itemsPerPage,
+      (currentPage + 1) * itemsPerPage
+    );
+
+    const prevPage = () => {
+      if (currentPage > 0) {
+        gsap.to('.texts', {
+          opacity: 0,
+          duration: 0.5,
+          onComplete: () => {
+            setCurrentPage(currentPage - 1);
+            gsap.to('.texts', {
+              opacity: 1,
+              duration: 0.5
+            });
+          }
+        });
+      }
+    };
+
+
+    useEffect(() => {
+      gsap.fromTo('.texts', { opacity: 0 }, { opacity: 1, duration: 1 });
+    }, [currentPage]);
+
+    const closeTextures = () => {
+      setMoreTexture(false);
+    }
+
   return (
     <>
     <Header />
@@ -75,18 +136,39 @@ function App() {
       </div>}
     {textureModal && <Plus className='text-white absolute bottom-80 right-16 cursor-pointer duration-500 ease hover:opacity-45' onClick={showMoreTextures} size={25} /> }
    
-
-  {moreTexture && <motion.div initial = {{ opacity: 0 }}
+   <AnimatePresence>
+  {moreTexture &&
+    
+   <motion.div initial = {{ opacity: 0 }}
                               animate = {{ opacity: 1 }}
                               transition={{ duration: 1, delay: 0.5}}
-  className='absolute w-2/5 bg-transparent h-1/2 top-56 left-24 flex flex-wrap gap-12'>
-   { matcapTextures.map((value) => (
+                              exit={{ opacity: 0}}
+  className='texts absolute w-2/5 bg-transparent h-1/2 top-56 left-24 flex flex-wrap gap-12'>
+   { paginatedTextures.map((value) => (
        <div key={value.id} className='flex flex-col items-center gap-4' >
-        <img src = {value.img} className='w-24 h-24 rounded-full shadow-medium shadow-gray-400 cursor-pointer duration-500 ease-in hover:opacity-50 ' />
+        <img src = {value.img} className='w-24 h-24 rounded-full shadow-medium shadow-gray-400 cursor-pointer duration-500 ease-in hover:opacity-50 ' 
+                                          onMouseEnter={() => setMainTexture(value.img)}
+        />
         <h2 className='text-white text-xl'>{value.title}</h2>
+     
        </div>
    ))}
-</motion.div>}
+
+   <motion.button initial = {{ opacity: 0, translateY: -5 }}
+                  animate = {{ opacity: 1, translateY: 0 }}
+                  transition={{ duration: 1, delay: 1}}
+   className='absolute bottom-0 -mb-16 left-56 text-white text-3xl flex items-center gap-4'><ArrowLeft onClick={prevPage} />0{currentPage}<ArrowRight onClick={nextPage}/></motion.button>
+
+   <button className='w-24 absolute top-0 -mt-16 right-0 text-white text-3xl underline underline-offset-8 duration-500 ease hover:text-orange-500'
+    onMouseEnter={() => setShowX('x')} 
+    onMouseLeave={() => setShowX('close')}
+    onClick={closeTextures}
+    >{showX}</button>
+</motion.div>
+  
+  
+}
+</AnimatePresence>
     </>
   )
 }
