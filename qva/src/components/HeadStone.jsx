@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useRef } from 'react'
-import { Html, Text3D, useGLTF, useMatcapTexture } from '@react-three/drei'
+import React, { useContext, useEffect, useRef, useState } from 'react'
+import { Html, Text3D, useGLTF, useMatcapTexture, useTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { UserContext } from '../context/UserContext'
 import { useFrame, useThree } from '@react-three/fiber';
@@ -11,8 +11,24 @@ const HeadStone = () => {
           showText, 
           yourName,
           surname,
-          img
+          img,
+          url
         } = useContext(UserContext);
+
+
+        // take url from localstorage
+        const [persistedUrl, setPersistedUrl] = useState(() => {
+          return localStorage.getItem('image-url') || 'https://st4.depositphotos.com/14953852/24787/v/380/depositphotos_247872612-stock-illustration-no-image-available-icon-vector.jpg';
+        });
+
+        // save url to localstorage
+        useEffect(() => {
+            if(url) {
+              localStorage.setItem('image-url', url);
+              setPersistedUrl(url);
+
+            }
+        }, [url])
 
   // Import model
   const { scene } = useGLTF('./headstone.glb');
@@ -141,6 +157,8 @@ const HeadStone = () => {
   }, [moreTexture, camera, showText, img]);
 
 
+  // use img texture
+  const imageTex = useTexture(persistedUrl);
 
   return (
     <>
@@ -175,8 +193,9 @@ const HeadStone = () => {
         {surname}
       </Text3D>
 
-      {img && <mesh ref={imgFrame} position={[ 1.7, 0.7, 0 ]}>
-            <planeGeometry args={[ 4.3, 5 ]} />
+      {img && <mesh ref={imgFrame} position={[ 1.95, 0.7, -0.8 ]}>
+            <planeGeometry args={[ 5, 5.5 ]} />
+            <meshStandardMaterial map={imageTex} />
           </mesh>}
     </>
   );
