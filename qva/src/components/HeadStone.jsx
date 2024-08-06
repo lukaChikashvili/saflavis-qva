@@ -4,6 +4,7 @@ import * as THREE from 'three'
 import { UserContext } from '../context/UserContext'
 import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
+import rageshveleboda from '../assets/sound.mp3';
 
 const HeadStone = () => {
   const { mainTexture,
@@ -149,8 +150,13 @@ const HeadStone = () => {
       duration: 2,
       ease: 'power2.inOut',
       delay: 2
-     })
- 
+     });
+
+    
+      const audio = new Audio(rageshveleboda);
+      audio.play();
+    
+
 
 
   }

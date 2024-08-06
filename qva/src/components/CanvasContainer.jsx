@@ -3,6 +3,7 @@ import { Canvas } from '@react-three/fiber'
 import HeadStone from './HeadStone'
 import { OrbitControls } from '@react-three/drei'
 import Lights from './Lights'
+import Cloth from './Cloth'
 
 const CanvasContainer = () => {
   return (
@@ -11,6 +12,7 @@ const CanvasContainer = () => {
             <OrbitControls makeDefault />
             <Lights />
            <HeadStone />
+           <Cloth />
         </Canvas>
       </>
   )
