@@ -16,6 +16,11 @@ const UserProvider = ({ children }) => {
      
      // text
      const [showText, setShowText] = useState(false);
+
+    // change name
+    const [yourName, setYourName] = useState('');
+    // change surname
+    const [surname, setSurname] = useState('');
     return (
         <UserContext.Provider 
         value = {{textureModal, 
@@ -25,7 +30,12 @@ const UserProvider = ({ children }) => {
                  moreTexture, 
                  setMoreTexture, 
                  showText, 
-                 setShowText}}>
+                 setShowText,
+                 yourName,
+                 setYourName, 
+                 surname, 
+                 setSurname
+                 }}>
             {children}
         </UserContext.Provider>
     )

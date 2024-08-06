@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useRef } from 'react'
-import { useGLTF, useMatcapTexture } from '@react-three/drei'
+import { Html, Text3D, useGLTF, useMatcapTexture } from '@react-three/drei'
 import * as THREE from 'three'
 import { UserContext } from '../context/UserContext'
 import { useFrame, useThree } from '@react-three/fiber';
@@ -8,7 +8,10 @@ import gsap from 'gsap';
 const HeadStone = () => {
   const { mainTexture,
           moreTexture ,
-          showText} = useContext(UserContext);
+          showText, 
+          yourName,
+          surname
+        } = useContext(UserContext);
 
   // Import model
   const { scene } = useGLTF('./headstone.glb');
@@ -91,15 +94,59 @@ const HeadStone = () => {
       ease: 'power2.inOut',
     });
 
+  }else {
+    gsap.to(camera.position, {
+      z: 5, 
+      duration: 2,
+      ease: 'power2.inOut',
+    });
 
+    gsap.to(modelRef.current.position, {
+      x: 0,
+      y: -2,
+      duration: 2,
+      ease: 'power2.inOut',
+    });
 
-  
-
+    gsap.to(modelRef.current.rotation, {
+      x: 0,
+      duration: 2,
+      ease: 'power2.inOut'
+    });
   }
   }, [moreTexture, camera, showText]);
   return (
     <>
       <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />
+      <Text3D font = "./helvetiker_regular.typeface.json" 
+              position={[4.5, 1, 0]} 
+              size={ 0.75 }
+        height={ 0.2 }
+        curveSegments={ 12 }
+        bevelEnabled
+        bevelThickness={ 0.02 }
+        bevelSize={ 0.02 }
+        bevelOffset={ 0 }
+        bevelSegments={ 5 }
+              >
+        {yourName}
+      </Text3D>
+      
+      <Text3D font = "./helvetiker_regular.typeface.json" 
+              position={[4.5, -1.5, 1]}
+              size={ 0.75 }
+              height={ 0.2 }
+              curveSegments={ 12 }
+              bevelEnabled
+              bevelThickness={ 0.02 }
+              bevelSize={ 0.02 }
+              bevelOffset={ 0 }
+              bevelSegments={ 5 }
+              
+              
+               >
+        {surname}
+      </Text3D>
     </>
   );
 };

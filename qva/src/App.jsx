@@ -10,6 +10,7 @@ import { ArrowLeft, ArrowRight, Plus, Type } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { matcapTextures } from './components/Matcaps.js'
 import gsap from 'gsap'
+import MoreTexts from './components/MoreTexts.jsx'
 
 
 function App() {
@@ -28,7 +29,8 @@ function App() {
            setMainTexture,
            setMoreTexture,
            moreTexture,
-           setShowText
+           setShowText,
+           showText
           } = useContext(UserContext);
 
    
@@ -50,7 +52,7 @@ function App() {
      const showMoreTextures = () => {
        setMoreTexture(true);
        setTextureModal(false);
-     
+       setShowText(false);
      }
 
      // show close icon
@@ -173,6 +175,8 @@ function App() {
 
 
 <button className='absolute bottom-4 text-2xl text-white left-12 flex items-center gap-4' onClick={() => setShowText(true)}><Type /> add text</button>
+
+{showText && <MoreTexts />}
     </>
   )
 }
