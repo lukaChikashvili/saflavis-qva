@@ -6,11 +6,12 @@ import Header from './components/Header'
 import Market from './components/Market'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './context/UserContext'
-import { ArrowLeft, ArrowRight, Plus, Type } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Image, Plus, Type } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { matcapTextures } from './components/Matcaps.js'
 import gsap from 'gsap'
 import MoreTexts from './components/MoreTexts.jsx'
+import ImageComp from './components/ImageComp.jsx'
 
 
 function App() {
@@ -30,7 +31,9 @@ function App() {
            setMoreTexture,
            moreTexture,
            setShowText,
-           showText
+           showText,
+           img, 
+           setImg
           } = useContext(UserContext);
 
    
@@ -177,6 +180,13 @@ function App() {
 <button className='absolute bottom-4 text-2xl text-white left-12 flex items-center gap-4' onClick={() => setShowText(true)}><Type /> add text</button>
 
 {showText && <MoreTexts />}
+
+<button className='absolute bottom-4 text-2xl text-white left-44 flex items-center gap-4'
+         onClick={() => setImg(true)}
+><Image />add image</button>
+
+{img &&  <ImageComp />}
+
     </>
   )
 }

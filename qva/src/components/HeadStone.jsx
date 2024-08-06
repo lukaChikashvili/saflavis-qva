@@ -10,7 +10,8 @@ const HeadStone = () => {
           moreTexture ,
           showText, 
           yourName,
-          surname
+          surname,
+          img
         } = useContext(UserContext);
 
   // Import model
@@ -41,7 +42,8 @@ const HeadStone = () => {
     }
   }, [scene, texture]);
 
-
+  // img frame ref
+  let imgFrame = useRef();
 
   useEffect(() => {
     // move camera smoothly to show textures
@@ -114,7 +116,32 @@ const HeadStone = () => {
       ease: 'power2.inOut'
     });
   }
-  }, [moreTexture, camera, showText]);
+
+
+  if(img) {
+    gsap.to(modelRef.current.position, {
+       z: 10,
+       y: -4.5,
+       x: 2, 
+      duration: 2,
+      ease: 'power2.inOut'
+    });
+
+     gsap.from(imgFrame.current.scale, {
+      x: 0,
+      y: 0,
+      duration: 2,
+      ease: 'power2.inOut',
+      delay: 2
+     })
+ 
+
+
+  }
+  }, [moreTexture, camera, showText, img]);
+
+
+
   return (
     <>
       <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />
@@ -147,6 +174,10 @@ const HeadStone = () => {
                >
         {surname}
       </Text3D>
+
+      {img && <mesh ref={imgFrame} position={[ 1.7, 0.7, 0 ]}>
+            <planeGeometry args={[ 4.3, 5 ]} />
+          </mesh>}
     </>
   );
 };
