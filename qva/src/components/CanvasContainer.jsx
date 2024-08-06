@@ -4,9 +4,11 @@ import HeadStone from './HeadStone'
 import { OrbitControls } from '@react-three/drei'
 import Lights from './Lights'
 import Cloth from './Cloth'
+import { UserContext } from '../context/UserContext'
 
 
 const CanvasContainer = () => {
+
 
   return (
       <>
@@ -14,7 +16,7 @@ const CanvasContainer = () => {
             <OrbitControls makeDefault />
             <Lights />
            <HeadStone />
-            <Cloth /> 
+           <Cloth /> 
         </Canvas>
       </>
   )

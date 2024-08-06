@@ -10,10 +10,10 @@ import { useTexture } from '@react-three/drei';
 
 const Cloth = () => {
 
-  const { cloth } = useContext(UserContext);
+  const { cloth, moreTexture } = useContext(UserContext);
 
   // red cloth
-  const redCloth = useTexture('./red.jpg');
+  const redCloth = useTexture('./gold.jpeg');
 
 
   // uniforms
@@ -80,16 +80,19 @@ const Cloth = () => {
       }else {
         
         gsap.to(clothRef.current.position, {
-          x: -30,
+          x: -100,
           duration: 2, 
           ease: 'power2.inOut'
-        })
+        });
+
+   
+        
+      
       }
 
 
       
     
-
      
     }, [cloth]);
 
@@ -97,13 +100,15 @@ const Cloth = () => {
   return (
    <>
      <mesh ref={clothRef} position={[ -25, 0, -3 ]}>
-        <planeGeometry args={[ 12, 6, 128, 128 ]}/>
+        <planeGeometry args={[ 12, 4, 128, 128 ]}/>
         <shaderMaterial 
           wireframe = {false}
           vertexShader={vertex}
           fragmentShader={fragment}
           uniforms = {uniforms.current}
           side={THREE.DoubleSide}
+          visible = {moreTexture ? false : true}
+          
         />
      </mesh>
    </>
