@@ -6,7 +6,7 @@ import Header from './components/Header'
 import Market from './components/Market'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './context/UserContext'
-import { ArrowLeft, ArrowRight, Plus } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Plus, Type } from 'lucide-react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { matcapTextures } from './components/Matcaps.js'
 import gsap from 'gsap'
@@ -27,7 +27,8 @@ function App() {
            mainTexture, 
            setMainTexture,
            setMoreTexture,
-           moreTexture
+           moreTexture,
+           setShowText
           } = useContext(UserContext);
 
    
@@ -62,7 +63,7 @@ function App() {
         gsap.to('.texts', {
           opacity: 0,
           duration: 0.5,
-          delay: 0.9, 
+          delay: 0.5, 
            ease: 'power1.inOut',
           onComplete: () => {
             setCurrentPage(currentPage + 1);
@@ -70,7 +71,7 @@ function App() {
               opacity: 1,
               duration: 0.5,
               ease: 'power1.inOut',
-              delay: 0.9
+              delay: 0.5
             });
           }
         });
@@ -169,6 +170,9 @@ function App() {
   
 }
 </AnimatePresence>
+
+
+<button className='absolute bottom-4 text-2xl text-white left-12 flex items-center gap-4' onClick={() => setShowText(true)}><Type /> add text</button>
     </>
   )
 }

@@ -6,7 +6,9 @@ import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 
 const HeadStone = () => {
-  const { mainTexture, moreTexture } = useContext(UserContext);
+  const { mainTexture,
+          moreTexture ,
+          showText} = useContext(UserContext);
 
   // Import model
   const { scene } = useGLTF('./headstone.glb');
@@ -39,6 +41,7 @@ const HeadStone = () => {
 
 
   useEffect(() => {
+    // move camera smoothly to show textures
    if(moreTexture) {
     gsap.to(camera.position, {
       x: 8,
@@ -66,7 +69,34 @@ const HeadStone = () => {
       ease: 'power2.inOut',
     });
   }
-  }, [moreTexture, camera]);
+
+  // move camera smoothly to show text
+  if(showText) {
+    gsap.to(modelRef.current.position, {
+      x: 7,
+      y: -4,
+      duration: 2,
+      ease: 'power2.inOut'
+    });
+
+    gsap.to(modelRef.current.rotation, {
+      x: 1.2,
+      duration: 2,
+      ease: 'power2.inOut'
+    });
+ 
+    gsap.to(camera.position, {
+      z: 9, 
+      duration: 2,
+      ease: 'power2.inOut',
+    });
+
+
+
+  
+
+  }
+  }, [moreTexture, camera, showText]);
   return (
     <>
       <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />

@@ -14,8 +14,18 @@ const UserProvider = ({ children }) => {
      // more textures
      const [moreTexture, setMoreTexture] = useState(false);
      
+     // text
+     const [showText, setShowText] = useState(false);
     return (
-        <UserContext.Provider value = {{textureModal, setTextureModal, mainTexture, setMainTexture, moreTexture, setMoreTexture}}>
+        <UserContext.Provider 
+        value = {{textureModal, 
+                 setTextureModal,
+                 mainTexture, 
+                 setMainTexture, 
+                 moreTexture, 
+                 setMoreTexture, 
+                 showText, 
+                 setShowText}}>
             {children}
         </UserContext.Provider>
     )
