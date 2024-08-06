@@ -9,7 +9,7 @@ const UserProvider = ({ children }) => {
     const [textureModal, setTextureModal] = useState(false);
 
     // texture change
-    const [mainTexture, setMainTexture] = useState('https://github.com/nidorx/matcaps/raw/master/thumbnail/0C430C_257D25_439A43_3C683C.jpg');
+    const [mainTexture, setMainTexture] = useState('https://github.com/nidorx/matcaps/raw/master/thumbnail/767989_323437_B6C4EE_343C44.jpg');
 
      // more textures
      const [moreTexture, setMoreTexture] = useState(false);

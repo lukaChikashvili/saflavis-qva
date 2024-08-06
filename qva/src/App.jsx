@@ -57,6 +57,8 @@ function App() {
        setMoreTexture(true);
        setTextureModal(false);
        setShowText(false);
+       setImg(false);
+       setCloth(false);
      }
 
      // show close icon

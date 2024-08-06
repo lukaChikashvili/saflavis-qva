@@ -38,7 +38,7 @@ const Cloth = () => {
     });
 
     useEffect(() => {
-      if (cloth) {
+      if (cloth ) {
         const timeline = gsap.timeline();
   
         timeline
@@ -111,6 +111,8 @@ const Cloth = () => {
           
         />
      </mesh>
+
+   
    </>
   )
 }

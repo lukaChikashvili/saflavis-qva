@@ -5,6 +5,7 @@ import { UserContext } from '../context/UserContext'
 import { useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
 import rageshveleboda from '../assets/sound.mp3';
+import { RigidBody } from '@react-three/rapier';
 
 const HeadStone = () => {
   const { mainTexture,
@@ -33,6 +34,10 @@ const HeadStone = () => {
 
   // Import model
   const { scene } = useGLTF('./headstone.glb');
+
+  // tree
+  //const tree = useGLTF('./tree.glb');
+  const rose = useGLTF('./red_rose.glb');
 
   // 3d model ref
   const modelRef = useRef();
@@ -165,7 +170,11 @@ const HeadStone = () => {
 
   return (
     <>
+    
+   <RigidBody type='fixed' friction={0.2} restitution={0.2}>
       <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />
+      </RigidBody>
+
       <Text3D font = "./helvetiker_regular.typeface.json" 
               position={[4.5, 1, 0]} 
               size={ 0.75 }
@@ -200,6 +209,10 @@ const HeadStone = () => {
             <planeGeometry args={[ 5, 5.5 ]} />
             <meshStandardMaterial map={imageTex} />
           </mesh>}
+
+<RigidBody colliders = "hull">
+   <primitive object={rose.scene} position ={[0, 3, -2]} rotation = {[-Math.PI / 4, 0, 0]} />
+   </RigidBody>
     </>
   );
 };
