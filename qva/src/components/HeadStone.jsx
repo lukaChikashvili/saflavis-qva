@@ -153,14 +153,11 @@ const HeadStone = () => {
      });
 
     
-      const audio = new Audio(rageshveleboda);
-      audio.play();
+     // const audio = new Audio(rageshveleboda);
+     // audio.play();
     
-
-
-
   }
-  }, [moreTexture, camera, showText, img]);
+  }, [moreTexture, camera, showText, img, ]);
 
 
   // use img texture

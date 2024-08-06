@@ -27,6 +27,9 @@ const UserProvider = ({ children }) => {
 
     // img url
     const [url, setUrl] = useState('https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png');
+
+    // show cloth
+    const [cloth, setCloth] = useState(false);
     return (
         <UserContext.Provider 
         value = {{textureModal, 
@@ -44,7 +47,9 @@ const UserProvider = ({ children }) => {
                  img,
                  setImg,
                  url, 
-                 setUrl
+                 setUrl,
+                 cloth,
+                 setCloth
                  }}>
             {children}
         </UserContext.Provider>

@@ -33,7 +33,8 @@ function App() {
            setShowText,
            showText,
            img, 
-           setImg
+           setImg,
+           setCloth
           } = useContext(UserContext);
 
    
@@ -114,6 +115,11 @@ function App() {
       setMoreTexture(false);
     }
 
+
+    const addImageFunc = () => {
+      setImg(true);
+      setCloth(true);
+    }
   return (
     <>
     <Header />
@@ -182,7 +188,7 @@ function App() {
 {showText && <MoreTexts />}
 
 <button className='absolute bottom-4 text-2xl text-white left-44 flex items-center gap-4'
-         onClick={() => setImg(true)}
+         onClick={addImageFunc}
 ><Image />add image</button>
 
 {img &&  <ImageComp />}

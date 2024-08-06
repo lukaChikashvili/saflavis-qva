@@ -3,14 +3,19 @@ import { UserContext } from '../context/UserContext'
 
 const Image = () => {
  
-  const { setUrl, setImg } = useContext(UserContext);
+  const { setUrl, setImg, setCloth } = useContext(UserContext);
+
+  const closeModal = () => {
+    setImg(false);
+    setCloth(false);
+  }
 
   return (
     <div className='absolute   w-1/2 h-1/2 bg-transparent bottom-56 left-24 p-12'>
        <div className='flex items-center gap-56'>
        <h1 className='text-4xl font-bold underline underline-offset-8 text-white'>Add photo</h1>
        <span className='text-4xl  text-white cursor-pointer duration-500 ease hover:text-orange-600' 
-             onClick={() => setImg(false)}
+             onClick={closeModal}
        >X</span>
        </div>
 
