@@ -35,9 +35,6 @@ const HeadStone = () => {
   // Import model
   const { scene } = useGLTF('./headstone.glb');
 
-  // tree
-  //const tree = useGLTF('./tree.glb');
-  const rose = useGLTF('./red_rose.glb');
 
   // 3d model ref
   const modelRef = useRef();
@@ -210,9 +207,6 @@ const HeadStone = () => {
             <meshStandardMaterial map={imageTex} />
           </mesh>}
 
-<RigidBody colliders = "hull">
-   <primitive object={rose.scene} position ={[0, 3, -2]} rotation = {[-Math.PI / 4, 0, 0]} />
-   </RigidBody>
     </>
   );
 };
