@@ -211,7 +211,7 @@ function App() {
 
       <button 
         style={{ fontFamily: lang &&  '"BPG Algeti Compact", sans-serif', fontSize: lang && "20px" }} 
-        className='absolute bottom-2 md:bottom-4 text-lg md:text-2xl text-white left-20 md:left-44 flex items-center gap-2 md:gap-4'
+        className='absolute bottom-2 md:bottom-4 text-lg md:text-2xl text-white left-28 md:left-44 flex items-center gap-2 md:gap-4'
         onClick={addImageFunc}
       >
         <Image />{lang ? "დაამატე სურათი" : "add image"}
