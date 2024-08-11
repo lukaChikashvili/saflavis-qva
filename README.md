@@ -6,7 +6,7 @@
 
 
 **Where can i see?**
-see live website here - [https://saflavis-qva.vercel.app/](url)
+see live website here - [https://saflavis-qva.vercel.app/]
 
 ---------------------------------------------------------------------------
 
