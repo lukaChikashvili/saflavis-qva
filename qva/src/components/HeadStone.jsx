@@ -8,6 +8,8 @@ import rageshveleboda from '../assets/sound.mp3';
 import { RigidBody } from '@react-three/rapier';
 
 const HeadStone = () => {
+
+
   const { mainTexture,
           moreTexture ,
           showText, 
@@ -166,6 +168,19 @@ const HeadStone = () => {
 
   // use img texture
   const imageTex = useTexture(persistedUrl);
+
+     // add responsivness
+     const width = window.innerWidth;
+     
+  
+     if(width < 768) {
+      if(modelRef.current) {
+        
+        
+      }
+      
+     }
+  
 
   return (
     <>
