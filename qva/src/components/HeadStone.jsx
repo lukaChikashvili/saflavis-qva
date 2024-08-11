@@ -14,7 +14,9 @@ const HeadStone = () => {
           yourName,
           surname,
           img,
-          url
+          url,
+          year,
+          textColor
         } = useContext(UserContext);
 
 
@@ -155,8 +157,8 @@ const HeadStone = () => {
      });
 
     
-     // const audio = new Audio(rageshveleboda);
-     // audio.play();
+      const audio = new Audio(rageshveleboda);
+     audio.play();
     
   }
   }, [moreTexture, camera, showText, img, ]);
@@ -169,38 +171,23 @@ const HeadStone = () => {
     <>
     
    <RigidBody type='fixed' friction={0.2} restitution={0.2}>
-      <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef} />
+      <primitive object={scene} scale={0.05} position-y={-2} ref = {modelRef}>
+      
+     <Html className='text-5xl -mt-96 -ml-4 font-bold' style={{color: textColor}}>
+      {yourName}
+     </Html>
+
+     <Html className='text-5xl -mt-80 -ml-4 font-bold' style={{color: textColor}}>
+      {surname}
+     </Html>
+
+     
+     <Html className='text-5xl -mt-64 -ml-4 font-bold' style={{color: textColor}}>
+      {year}
+     </Html>
+     </primitive>
       </RigidBody>
 
-      <Text3D font = "./helvetiker_regular.typeface.json" 
-              position={[4.5, 1, 0]} 
-              size={ 0.75 }
-        height={ 0.2 }
-        curveSegments={ 12 }
-        bevelEnabled
-        bevelThickness={ 0.02 }
-        bevelSize={ 0.02 }
-        bevelOffset={ 0 }
-        bevelSegments={ 5 }
-              >
-        {yourName}
-      </Text3D>
-      
-      <Text3D font = "./helvetiker_regular.typeface.json" 
-              position={[4.5, -1.5, 1]}
-              size={ 0.75 }
-              height={ 0.2 }
-              curveSegments={ 12 }
-              bevelEnabled
-              bevelThickness={ 0.02 }
-              bevelSize={ 0.02 }
-              bevelOffset={ 0 }
-              bevelSegments={ 5 }
-              
-              
-               >
-        {surname}
-      </Text3D>
 
       {img && <mesh ref={imgFrame} position={[ 1.95, 0.7, -0.8 ]}>
             <planeGeometry args={[ 5, 5.5 ]} />

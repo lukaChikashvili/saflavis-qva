@@ -3,7 +3,6 @@ import { Route, Routes } from 'react-router-dom'
 
 import CanvasContainer from './components/CanvasContainer'
 import Header from './components/Header'
-import Market from './components/Market'
 import { useContext, useEffect, useState } from 'react'
 import { UserContext } from './context/UserContext'
 import { ArrowLeft, ArrowRight, Image, Plus, Type } from 'lucide-react';
@@ -34,7 +33,8 @@ function App() {
            showText,
            img, 
            setImg,
-           setCloth
+           setCloth,
+           lang
           } = useContext(UserContext);
 
    
@@ -127,7 +127,7 @@ function App() {
     <Header />
     <Routes>
        <Route path='/' element = { <CanvasContainer />}/>
-       <Route path='/market' element = { <Market />}/>
+       
     </Routes>
 
       
@@ -137,12 +137,13 @@ function App() {
                 className='absolute bottom-4 right-32 w-8 rounded-full' src = {mainTexture} />
 
 
-      <motion.button className='absolute text-white bottom-4 text-2xl right-12' 
+      <motion.button style={{fontFamily: lang &&  '"BPG Algeti Compact", sans-serif', fontSize: lang && "20px"}}
+      className='absolute text-white bottom-4 text-2xl right-12' 
                      initial = {{ opacity: 0 }}
                      animate = {{ opacity: 1  }}
                      transition={{ duration: 1, delay: 0.2}}
                       onClick={showModal}
-      >Textures</motion.button>
+      >{lang ? "დიზაინი" : "Textures"}</motion.button>
     {textureModal && <div className='absolute bottom-16 text-white right-12 text-2xl flex flex-col gap-4'>
         {defaultTextures.map((value, i) => (
            <img key = {i} src={value} className='w-12 rounded-full cursor-pointer border-2 border-transparent duration-500 ease-in hover:border-2 hover:border-white' onClick={() => chooseTexture(value)}/>
@@ -173,9 +174,9 @@ function App() {
                   transition={{ duration: 1, delay: 1}}
    className='absolute bottom-0 -mb-16 left-56 text-white text-3xl flex items-center gap-4'><ArrowLeft onClick={prevPage} />0{currentPage}<ArrowRight onClick={nextPage}/></motion.button>
 
-   <button className='w-24 absolute top-0 -mt-16 right-0 text-white text-3xl underline underline-offset-8 duration-500 ease hover:text-orange-500'
+   <button style={{fontFamily: lang &&  '"BPG Algeti Compact", sans-serif', fontSize: lang && "20px"}}  className='w-24 absolute top-0 -mt-16 right-0 text-white text-3xl underline underline-offset-8 duration-500 ease hover:text-orange-500'
     onMouseEnter={() => setShowX('x')} 
-    onMouseLeave={() => setShowX('close')}
+    onMouseLeave={() => setShowX(lang ? 'დახურვა' : 'close')}
     onClick={closeTextures}
     >{showX}</button>
 </motion.div>
@@ -185,13 +186,13 @@ function App() {
 </AnimatePresence>
 
 
-<button className='absolute bottom-4 text-2xl text-white left-12 flex items-center gap-4' onClick={() => setShowText(true)}><Type /> add text</button>
+<button style={{fontFamily: lang &&  '"BPG Algeti Compact", sans-serif', fontSize: lang && "20px"}}  className='absolute bottom-4 text-2xl text-white left-12 flex items-center gap-4' onClick={() => setShowText(true)}><Type />{lang ? " ტექსტი" : "add text"} </button>
 
 {showText && <MoreTexts />}
 
-<button className='absolute bottom-4 text-2xl text-white left-44 flex items-center gap-4'
+<button style={{fontFamily: lang &&  '"BPG Algeti Compact", sans-serif', fontSize: lang && "20px"}} className='absolute bottom-4 text-2xl text-white left-44 flex items-center gap-4'
          onClick={addImageFunc}
-><Image />add image</button>
+><Image />{lang ? "დაამატე სურათი" : "add image"}</button>
 
 {img &&  <ImageComp />}
 

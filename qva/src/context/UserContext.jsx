@@ -22,6 +22,9 @@ const UserProvider = ({ children }) => {
     // change surname
     const [surname, setSurname] = useState('');
 
+    // change year
+    const [year, setYear] = useState(false);
+
     // add image
     const [img, setImg] = useState(false);
 
@@ -30,6 +33,11 @@ const UserProvider = ({ children }) => {
 
     // show cloth
     const [cloth, setCloth] = useState(false);
+
+    const [textColor, setTextColor] = useState('black');
+
+    // change language
+    const [lang, setLang] = useState(false);
     return (
         <UserContext.Provider 
         value = {{textureModal, 
@@ -49,7 +57,13 @@ const UserProvider = ({ children }) => {
                  url, 
                  setUrl,
                  cloth,
-                 setCloth
+                 setCloth,
+                 year,
+                 setYear,
+                 textColor, 
+                 setTextColor,
+                 lang, 
+                 setLang
                  }}>
             {children}
         </UserContext.Provider>
